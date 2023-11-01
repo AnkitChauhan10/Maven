@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        // Define environment variables here if needed
+        
         DOCKER_REGISTRY = 'docker.io/ankitchauhan18aa'
     }
     
@@ -10,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build and tag the Docker image
+                    
                     docker.build("${DOCKER_REGISTRY}/springboot:lts")
                 }
             }
@@ -19,7 +19,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    // Push the Docker image to the registry
+                   
                     docker.withRegistry("${DOCKER_REGISTRY}", 'your-docker-credentials') {
                         docker.image("${DOCKER_REGISTRY}/springboot:lts").push()
                     }
@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Apply Kubernetes configurations using kubectl with a default config
+                    
                     sh "kubectl apply -f kubernetes/deployment.yaml"
                 }
             }
@@ -39,7 +39,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 script {
-                    // Clean up resources if needed
+                    
                     echo "done"
                 }
             }
