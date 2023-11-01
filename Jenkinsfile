@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Build and tag the Docker image
-                    docker.build("${DOCKER_REGISTRY}/your-app:${BUILD_NUMBER}")
+                    docker.build("${DOCKER_REGISTRY}/springboot:lts")
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Push the Docker image to the registry
                     docker.withRegistry("${DOCKER_REGISTRY}", 'your-docker-credentials') {
-                        docker.image("${DOCKER_REGISTRY}/your-app:${BUILD_NUMBER}").push()
+                        docker.image("${DOCKER_REGISTRY}/springboot:lts").push()
                     }
                 }
             }
@@ -48,7 +48,7 @@ pipeline {
     post {
         always {
             // Clean up Docker images
-            sh "docker rmi -f ${DOCKER_REGISTRY}/your-app:${BUILD_NUMBER}"
+            sh "docker rmi -f ${DOCKER_REGISTRY}/springboot:lts"
         }
     }
 }
