@@ -40,6 +40,7 @@ pipeline {
             steps {
                 script {
                     // Clean up resources if needed
+                    echo "done"
                 }
             }
         }
